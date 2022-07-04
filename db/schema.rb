@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_031352) do
     t.string "title"
     t.string "desc"
     t.string "src"
-    t.boolean "is_private"
+    t.boolean "is_private", default: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_031352) do
     t.string "title"
     t.string "desc"
     t.string "src"
-    t.boolean "is_private"
+    t.boolean "is_private", default: false
     t.integer "user_id"
     t.integer "album_id"
     t.datetime "created_at", null: false
@@ -40,8 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_031352) do
     t.string "last_name"
     t.string "email"
     t.string "password"
-    t.boolean "is_private"
-    t.boolean "is_admin"
+    t.boolean "is_private", default: false
+    t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -5,8 +5,8 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.string :email
       t.string :password
-      t.boolean :is_private
-      t.boolean :is_admin
+      t.boolean :is_private, default: false
+      t.boolean :is_admin, default: false
       t.timestamps
     end
   end
