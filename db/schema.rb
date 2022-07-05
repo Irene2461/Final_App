@@ -28,10 +28,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_035603) do
   end
 
   create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "likeable_type"
     t.integer "likeable_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -59,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_035603) do
   end
 
   add_foreign_key "albums", "users"
+  add_foreign_key "likes", "users"
   add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
 end
