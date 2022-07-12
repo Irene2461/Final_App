@@ -1,0 +1,61 @@
+<div id="feed" class="container">
+    <ul class="nav nav-pills mt-3 justify-content-center" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">PHOTO</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">ALBUM</button>
+        </li>
+    </ul>
+    <%# Dùng slice(index1,index2).each để chia row và col %>
+    <div class="tab-content p-2" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+            <div class="row">
+                <% @photos.each do |photo|%>
+                    <div class="col-xl-6 my-2">
+                        <div id="card" class="row d-flex justify-content-around">
+                            <div class="col-6 px-0 py-0">
+                                <div class="photo-container">
+                                    <%= image_tag photo.src %>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div id="profile">
+                                    <h2 id="name">
+                                        <span id="avatar">J</span> 
+                                        <%= @users.where(id: photo.user_id).first.first_name%>
+                                        <%= @users.where(id: photo.user_id).first.last_name %>
+                                    </h2>
+                                    <h6><%= photo.title %></h6>
+                                    <p class="card-text">
+                                        <%= photo.desc %>
+                                    </p>
+                                    <div class="card-footer row" style="padding-top: 2%;">
+                                        <div class="col-2" style="padding-right: 0px;">
+                                            <button class="like-button"><i style="font-size: 20px;" class="fa-solid fa-heart"></i></button>
+                                        </div>
+                                        <div class="col-2" style="padding-left: 0px;">
+                                            <p id="heart-number">
+                                                <%= photo.likes.count %>
+                                            </p>
+                                        </div>
+                                        <div class="col-8" style="padding-right: 0px;">
+                                            <p id="date-time">
+                                                <%= photo.created_at %>
+                                            </p>
+                                        </div>                                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0"></div>
+        </div>
+        <div class="container text-center">
+            <i style="font-size: 50px;" class="fa-solid fa-spinner"></i>
+        </div>
+    </div>
+</div>
