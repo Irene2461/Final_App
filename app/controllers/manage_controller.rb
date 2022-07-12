@@ -7,4 +7,5 @@ class ManageController < ApplicationController
 
   def users
   end
+  
 end
