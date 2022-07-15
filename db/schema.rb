@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_164749) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_14_063135) do
   create_table "albums", force: :cascade do |t|
     t.string "title"
     t.string "desc"
@@ -25,6 +25,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_164749) do
   create_table "followers_followings", id: false, force: :cascade do |t|
     t.integer "following_id", null: false
     t.integer "follower_id", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "likeable_type"
+    t.integer "likeable_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -45,13 +54,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_164749) do
     t.string "last_name"
     t.string "email"
     t.string "password"
-    t.boolean "is_private", default: false
+    t.boolean "is_active", default: false
     t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "albums", "users"
+  add_foreign_key "likes", "users"
   add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
 end

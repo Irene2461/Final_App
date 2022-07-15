@@ -14,7 +14,9 @@
  *= require_self
  */
  @import 'feed_photo.css';
-
+ @import 'feed_album.css';
+ @import 'manage.css';
+ @import 'edit.css';
  
 /* Navbar */
 * {

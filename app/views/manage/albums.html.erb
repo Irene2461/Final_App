@@ -1,0 +1,41 @@
+<div class="row" style="background: #F8F8F8;">
+     <div class="col-2 min-vh-100" style="padding-right: 0% !important;">
+        <div class="d-flex justify-content-center" id="menu">
+            <div class="nav flex-column align-items-start nav-pills me-0 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <%= button_to "Manage Photos", manage_photos_path , :method => :get , :class => 'nav-link', :id => 'v-pills-home-tab'%>
+                <%= button_to "Manage Albums", manage_albums_path , :method => :get , :class => 'nav-link active', :id => 'v-pills-profile-tab'%>
+                <%= button_to "Manage Users", manage_users_path , :method => :get , :class => 'nav-link', :id => 'v-pills-messages-tab'%>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content col-8 bg-white mt-3 mb-5">
+        <div class="tab-pane fade show active" id="v-pills-profile" style="height: 100%;" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            <div class="row" style="height: fit-content;">
+                <% @albums.each do |album|%>
+                    <div class="col-3">     
+                        <%= image_tag album.photos.first.src, :class => "img_1_1" %>
+                        <%= image_tag album.photos.first.src, :class => "img_1_2" %>
+                        <%= image_tag album.photos.first.src, :class => "img_1_3" %>
+                        <div class="title-container">
+                            <a href="#"> Lorem ipsum dolor sit <i style="font-size: 22px;"class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div id="pagination">
+                <%= paginate @albums%>
+            </div>
+        </div>     
+    </div>
+    <div class="col-2">
+
+    </div>
+
+    <script>
+        function relocate_home()
+        {
+            location.href = "edit";
+        } 
+    </script>
+</div>

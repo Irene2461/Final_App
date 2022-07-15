@@ -1,54 +1,69 @@
-<div id="feed" class="container">
+<div class="col-2 min-vh-100" style="padding-right: 0% !important;">
+    <div class="d-flex justify-content-center" id="menu">
+        <div class="nav flex-column align-items-start nav-pills me-0 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <%= button_to "Feed", feeds_photos_path , :method => :get , :class => 'nav-link active'%>
+            <%= button_to "Discover", '#' , :method => :get , :class => 'nav-link'%>
+        </div>
+    </div>
+</div>
+<div id="feed" class="container col-8 bg-white mt-3 mb-5">
     <ul class="nav nav-pills mt-3 justify-content-center" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">PHOTO</button>
+            <%= button_to "PHOTO", feeds_photos_path , :method => :get , :class => 'nav-link active', :id => 'pills-home-tab'%>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">ALBUM</button>
+            <%= button_to "ALBUM", feeds_albums_path , :method => :get , :class => 'nav-link', :id => 'pills-profile-tab'%>
         </li>
     </ul>
     <%# Dùng slice(index1,index2).each để chia row và col %>
     <div class="tab-content p-2" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
             <div class="row">
-                <% @photos.each do |photo|%>
-                    <div class="col-xl-6 my-2">
-                        <div id="card" class="row d-flex justify-content-around">
-                            <div class="col-6 px-0 py-0">
-                                <div class="photo-container">
-                                    <%= image_tag photo.src %>
+                <% if @photos != nil %>
+                    <% @photos.each do |photo|%>
+                        <div class="col-xl-6 my-2">
+                            <div id="card" class="row d-flex justify-content-around">
+                                <div class="col-6 px-0 py-0">
+                                    <div class="photo-container">
+                                        <%= image_tag photo.src %>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <div id="profile">
-                                    <h2 id="name">
-                                        <span id="avatar">J</span> 
-                                        <%= @users.where(id: photo.user_id).first.first_name%>
-                                        <%= @users.where(id: photo.user_id).first.last_name %>
-                                    </h2>
-                                    <h6><%= photo.title %></h6>
-                                    <p class="card-text">
-                                        <%= photo.desc %>
-                                    </p>
-                                    <div class="card-footer row" style="padding-top: 2%;">
-                                        <div class="col-2" style="padding-right: 0px;">
-                                            <button class="like-button"><i style="font-size: 20px;" class="fa-solid fa-heart"></i></button>
+                                <div class="col-6">
+                                    <div id="profile">
+                                        <h2 id="name">
+                                            <span id="avatar">J</span> 
+                                            <%= @users.where(id: photo.user_id).first.first_name%>
+                                            <%= @users.where(id: photo.user_id).first.last_name %>
+                                        </h2>
+                                        <h6><%= photo.title %></h6>
+                                        <p class="card-text d-none d-md-block">
+                                            <%= photo.desc %>
+                                        </p>
+                                        <p class="card-text d-md-none">
+                                            <%= photo.desc.slice(0,25) + '...' %>
+                                        </p>
+                                        <div class="card-footer row" style="padding-top: 2%;">
+                                            <div class="col-3 col-md-2" style="padding-right: 0px;">
+                                                <button class="like-button"><i style="font-size: 20px;" class="fa-solid fa-heart"></i></button>
+                                            </div>
+                                            <div class="col-3 col-md-2" style="padding-left: 0px;">
+                                                <p id="heart-number">
+                                                    <%= photo.likes.count %>
+                                                </p>
+                                            </div>
+                                            <div class="d-flex col-md-8 align-items-center" style="padding-right: 0px;">
+                                                <p id="date-time" class="d-none d-sm-block">
+                                                    <%= photo.created_at.to_s.slice(0,20) %>
+                                                </p>
+                                            </div>                                  
                                         </div>
-                                        <div class="col-2" style="padding-left: 0px;">
-                                            <p id="heart-number">
-                                                <%= photo.likes.count %>
-                                            </p>
-                                        </div>
-                                        <div class="col-8" style="padding-right: 0px;">
-                                            <p id="date-time">
-                                                <%= photo.created_at %>
-                                            </p>
-                                        </div>                                  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <% end %>
+                <% else %>
+                    <p class="text-danger">No photos are found</p>
                 <% end %>
             </div>
         </div>
@@ -59,3 +74,4 @@
         </div>
     </div>
 </div>
+<div class="col-2"></div>
