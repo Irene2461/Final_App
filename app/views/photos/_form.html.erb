@@ -2,7 +2,6 @@
   <% if photo.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
-
       <ul>
         <% photo.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -17,10 +16,9 @@
         <%= form.text_field :title, class: "form-control" %>
       </div>
       <div>
-        <%= form.label :is_private, style: "display: block" %>
-        <%= form.check_box :is_private %>
+           <%= form.select :is_private, [["Private", true], ["Public", false]]%>
       </div>
-      <div class="row">
+      <div class="row py-2">
         <div class="col-12">
           <%= image_tag photo.src %>
         </div>

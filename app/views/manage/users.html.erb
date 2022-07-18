@@ -30,7 +30,7 @@
                             <td>@4:56am 04/16/2018</td>
                             <td class="d-flex">
                                 <%= button_to "Edit", edit_user_path(user) , :method => :get , :class => 'btn btn-success mx-1'%>
-                                <button class="btn btn-danger mx-1">Delete</button>
+                                <%= button_to "Delete", @user, method: :delete, class: "btn btn-danger" %>
                             </td>
                         </tr>
                     <% end %>
@@ -43,13 +43,5 @@
         </div>
     </div>
     <div class="col-2">
-
     </div>
-
-    <script>
-        function relocate_home()
-        {
-            location.href = "edit";
-        } 
-    </script>
 </div>
