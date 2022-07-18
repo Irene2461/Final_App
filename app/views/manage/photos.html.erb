@@ -16,7 +16,8 @@
                     <div class="col-3">
                         <%= image_tag photo.src %>
                         <div class="title-container">
-                            <a href="#"> Lorem ipsum dolor sit <i style="font-size: 22px;"class="fa-solid fa-pen-to-square"></i></a>
+                            <%= link_to "Edit photo", edit_photo_path(photo) , :method => :get %>
+                            <%# <a href="#"> Lorem ipsum dolor sit <i style="font-size: 22px;"class="fa-solid fa-pen-to-square"></i></a> %>
                         </div>
                     </div>
                 <% end %>

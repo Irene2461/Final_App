@@ -62,3 +62,7 @@
 #editForm #submitInput input:hover{
     background: #01692e;
 }
+
+#formEditPhoto input{
+    width: 100%;
+}
