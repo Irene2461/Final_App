@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+3.times do
+  User.first.photos.create([
+    title: "Photo 2",desc: "Nothing", src: "2.png", is_private: false, album_id: 1
+  ])
+end

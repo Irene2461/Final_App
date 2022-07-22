@@ -1,0 +1,11 @@
+vi:
+  hello: "Xin chào"
+  navbar:
+    search: "Tìm kiếm"
+    login: "Đăng nhập"
+  feed:
+    photos:
+      photo: "HÌNH ẢNH"
+      album: "TẬP ẢNH"
+      feed: "Bảng tin"
+      discover: "Khám phá"

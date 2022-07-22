@@ -2,20 +2,33 @@
     <div class="container-fluid">
         <div class="row align-items-center" id="navbar">
             <div class="col-2 d-flex" id="title">
-                <a class="navbar" href="/">Fotobook</a>
+                <% if current_user.present? %>
+                    <% if current_user.is_admin == true %>
+                        <a class="navbar" href="/">Fotobook Admin</a>
+                    <% end %>  
+                <% else %>
+                    <a class="navbar" href="/">Fotobook</a>
+                <% end %> 
+
             </div>
             <div class="col-8">
                 <form class="d-flex" role="search">
                     <input
                         class="form-control me-2"
                         type="search"
-                        placeholder="Search Photo/Album"
+                        placeholder= <%= (t "navbar.search")%>
                         aria-label="Search"
                     >
                 </form>
             </div>
             <div class="col-2 d-inline-block float-start">
-                <a class="navbar" href="/manage/photos" id="login">Login</a>
+                <% if user_signed_in? %>
+                    <a href="/admin/photos" style = "text-decoration: none; color: white; margin-right: 5%;"><%= current_user.first_name %></a> 
+                    <%= link_to "Log out", destroy_user_session_path, class: "btn btn-danger", method: :delete, data: {turbo_method: :delete} %>
+                <% else %>
+                    <%= link_to "Log in", new_user_session_path, class: "btn btn-info text-white" %>
+                <% end %>
+                <%# <a class="navbar" href="/users/sign_in" id="login">= t 'navbar.login'</a> %>
             </div>
         </div>
     </div>

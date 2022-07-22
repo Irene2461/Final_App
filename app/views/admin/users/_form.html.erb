@@ -1,0 +1,42 @@
+<%= form_with(scope: :user, url: admin_user_path) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+  
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="d-flex align-items-center py-2">
+    <%= form.label :first_name, style:"width: 30%;"%>
+    <%= form.text_field :first_name,  class: 'form-control', style:'height: 32px; font-size: 13px;' %>
+  </div>
+
+  <div class="d-flex align-items-center py-2">
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name,  class: 'form-control', style:'height: 32px; font-size: 13px;' %>
+  </div>
+
+  <div class="d-flex align-items-center py-2"> 
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email,  class: 'form-control', style:'height: 32px; font-size: 13px;' %>
+  </div>
+
+  <div class="d-flex align-items-center py-2">
+    <%= form.label :password, style: "display: block" %>
+    <%= form.text_field :password,  class: 'form-control', style:'height: 32px; font-size: 13px;' %>
+  </div>
+
+  <div class="d-flex align-items-center py-2">
+    <%= form.label "Active?", style: "display: block; width: 30%;"%>
+    <%= form.check_box :is_active , style:'height: 32px; font-size: 15px;'%>
+  </div>
+  <div id="submitInput">
+    <%= button_to "Save", admin_user_path(@user), method: :put, class: "btn btn-success"%>
+  </div>
+  
+<% end %>

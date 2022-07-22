@@ -30,9 +30,10 @@
                             <td>@4:56am 04/16/2018</td>
                             <td class="d-flex">
                                 <%= button_to "Edit", edit_user_path(user) , :method => :get , :class => 'btn btn-success mx-1'%>
-                                <%= button_to "Delete", @user, method: :delete, class: "btn btn-danger" %>
+                                <%= button_to "Delete", user, method: :delete, class: 'btn btn-danger' %>
                             </td>
                         </tr>
+                        <p style="color: green"> <%= notice %></p>
                     <% end %>
                     <div id="pagination">
                         <%= paginate @users%>

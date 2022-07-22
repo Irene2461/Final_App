@@ -1,0 +1,39 @@
+<%= form_with(scope: :album, url: admin_album_path(@album)) do |form| %>
+  <% if album.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(album.errors.count, "error") %> prohibited this album from being saved:</h2>
+      <ul>
+        <% album.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-6">
+        <div>
+          <%= form.label :title, style: "display: block" %>
+          <%= form.text_field :title, class: "form-control"  %>
+        </div>
+        <div>
+           <%= form.select :is_private, [["Private", true], ["Public", false]]%>
+        </div>
+    </div>
+    <div class="col-6">
+      <div>
+        <%= form.label :desc, style: "display: block" %>
+        <%= form.text_field :desc, style: 'height: 80px;', class: "form-control"  %>
+      </div>
+      <div>
+        <%= form.label :src, style: "display: block" %>
+        <%= form.file_field :src, style: 'height: 80px;', class: "form-control"  %>
+        <%#= image_tag , size: '200x200' %>
+      </div>
+    </div>
+  </div>
+  <div id = "submitInput">
+    <%#= form.submit "Save"%>
+    <%= button_to "Save", admin_album_path(@album), method: :put, class: "btn btn-success"%>
+  </div>
+  <p style="color: green"> <%= notice %></p>
+<% end %>

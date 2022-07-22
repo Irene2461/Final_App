@@ -1,0 +1,51 @@
+<% if current_user.is_admin == true %>
+    <div class="row" style="background: #F8F8F8;">
+        <div class="col-2 min-vh-100" style="padding-right: 0% !important;">
+            <div class="d-flex justify-content-center" id="menu">
+                <div class="nav flex-column align-items-start nav-pills me-0 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <%= button_to "Manage Photos", admin_photos_path , :method => :get , :class => 'nav-link', :id => 'v-pills-home-tab'%>
+                    <%= button_to "Manage Albums", admin_albums_path , :method => :get , :class => 'nav-link', :id => 'v-pills-profile-tab'%>
+                    <%= button_to "Manage Users", admin_users_path , :method => :get , :class => 'nav-link active', :id => 'v-pills-messages-tab'%>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content col-8 bg-white mt-3 mb-5">
+            <div class="tab-pane fade show active" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                <table id="user-management" class="table borderless">
+                    <thead>
+                        <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Last login</th>
+                        <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @users.each do |user|%>
+                            <tr>
+                                <td><%= user.first_name %></td>
+                                <td><%= user.last_name %></td>
+                                <td><%= user.email %></td>
+                                <td><%= user.last_sign_in_at %></td>
+                                <td class="d-flex">
+                                    <%= button_to "Edit", edit_admin_user_path(user) , method: :get , class: 'btn btn-success mx-1'%>
+                                    <%= button_to "Delete", admin_user_path(user), method: :delete, class: 'btn btn-danger' %>
+                                </td>
+                            </tr>
+                        <% end %>
+                        <div id="pagination">
+                            <%= paginate @users%>
+                        </div>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+<% else %>
+    <h1>You have no rights to access this page</h1>
+<% end %>

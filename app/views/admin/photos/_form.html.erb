@@ -1,0 +1,47 @@
+<%= form_with(scope: :photo, url: admin_photo_path(@photo)) do |form| %>
+  <% if photo.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+      <ul>
+        <% photo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-6">
+      <div>
+        <%= form.label :title, style: "display: block" %>
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
+      <div>
+           <%= form.select :is_private, [["Private", true], ["Public", false]]%>
+      </div>
+      <div class="row py-2">
+        <div class="col-12">
+          <%= image_tag photo.src %>
+        </div>
+        <div class="col-3 text-center m-3">
+          <div>
+            <%#= form.submit "Save", class: 'btn btn-info text-light' %>
+            <%= button_to "Save", admin_photo_path(@photo), method: :put, class: "btn btn-success"%>
+          </div>
+        </div>
+        <div class="col-3 text-center mx-2 my-3">
+          <div>
+            <%= button_to "Delete", admin_photo_path(@photo), method: :delete, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class ="col-6">
+      <div style="word-wrap: break-word;">
+        <%= form.label "Description", style: "display: block" %>
+        <%= form.text_field :desc, style: 'height: 80px;', class: "form-control" %>
+      </div>
+    </div>  
+  </div>
+  <p style="color: green"> <%= notice %></p>
+<% end %>
+

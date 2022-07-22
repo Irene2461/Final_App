@@ -13,7 +13,12 @@
   </head>
 
   <body style="background-color: #F8F8F8;">
-    <%= render partial:"shared/navbar" %>
+    <%= flash[:alert] %>
+    <%= render partial:"shared/navbar" , locals: { user_name: 'ngoc'} %>
     <%= yield %>
+    <%= t 'feed.photos.photo' %>
+    <li><%= link_to 'English', root_path(locale: :en) %></li>
+    <li><%= link_to 'Tiếng Việt', root_path(locale: :vi) %></li>
+    <%= t 'hello' %>
   </body>
 </html>
