@@ -51,7 +51,7 @@ class Admin::PhotosController < ApplicationController
   def set_photo
     @photo = Photo.find(params[:id])
   rescue
-    redirect_to admin_photos_path, alert: "1234567"
+    redirect_to admin_photos_path, alert: "No photo found"
   end
 
   # Only allow a list of trusted parameters through.

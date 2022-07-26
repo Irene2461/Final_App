@@ -40,7 +40,7 @@ class Admin::UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    binding.pry
+    # binding.pry
     @user.destroy!
     redirect_to admin_manage_users_path, notice: "User was successfully destroyed."
   end
@@ -50,10 +50,12 @@ class Admin::UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  rescue
+    redirect_to admin_users_path, alert: "No user found"
   end
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :is_admin, :is_active)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :is_admin, :is_active, :avatar)
   end
 end

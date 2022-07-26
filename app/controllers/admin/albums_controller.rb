@@ -49,6 +49,8 @@ class Admin::AlbumsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_album
     @album = Album.find(params[:id])
+  rescue
+    redirect_to admin_albums_path, alert: "No album found"
   end
 
   # Only allow a list of trusted parameters through.

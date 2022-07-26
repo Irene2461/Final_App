@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, 
          :trackable
-         
+
   has_many :albums, dependent: :destroy
   has_many :photos, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -20,4 +20,6 @@ class User < ApplicationRecord
                           foreign_key: "following_id",
                           association_foreign_key: "follower_id",
                           class_name: "User"
+
+  mount_uploader :avatar, ImageUploader
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_22_021622) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_25_035736) do
   create_table "albums", force: :cascade do |t|
     t.string "title"
     t.string "desc"
@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_22_021622) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

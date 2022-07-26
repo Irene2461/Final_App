@@ -1,18 +1,18 @@
 <div class="col-2 min-vh-100" style="padding-right: 0% !important;">
     <div class="d-flex justify-content-center" id="menu">
         <div class="nav flex-column align-items-start nav-pills me-0 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <%= button_to (t 'feed.photos.feed'), feeds_photos_path , :method => :get , :class => 'nav-link active'%>
-            <%= button_to (t 'feed.photos.discover'), '#' , :method => :get , :class => 'nav-link'%>
+            <%= button_to (t 'feed.photos.feed'), feeds_photos_path , method: :get , class: 'nav-link active'%>
+            <%= button_to (t 'feed.photos.discover'), '#' , method: :get , class: 'nav-link'%>
         </div>
     </div>
 </div>
 <div id="feed" class="container col-8 bg-white mt-3 mb-5">
     <ul class="nav nav-pills mt-3 justify-content-center" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
-            <%= button_to (t 'feed.photos.photo'), feeds_photos_path , :method => :get , :class => 'nav-link active', :id => 'pills-home-tab'%>
+            <%= button_to (t 'feed.photos.photo'), feeds_photos_path , method: :get , class: 'nav-link active', id: 'pills-home-tab'%>
         </li>
         <li class="nav-item" role="presentation">
-            <%= button_to (t 'feed.photos.album'), feeds_albums_path , :method => :get , :class => 'nav-link', :id => 'pills-profile-tab'%>
+            <%= button_to (t 'feed.photos.album'), feeds_albums_path , method: :get , class: 'nav-link', id: 'pills-profile-tab'%>
         </li>
     </ul>
     <%# Dùng slice(index1,index2).each để chia row và col %>
@@ -25,7 +25,10 @@
                             <div id="card" class="row d-flex justify-content-around">
                                 <div class="col-6 px-0 py-0">
                                     <div class="photo-container">
-                                        <%= image_tag photo.src %>
+                                        <button type="button" class="btn p-0" data-bs-toggle="modal" data-bs-target="#p<%= photo.id %>" style="height: 100%; width: 100%;">
+                                            <%= image_tag photo.src %>
+                                        </button>
+                                        <%#= image_tag photo.src %>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -61,6 +64,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="p<%= photo.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <%= image_tag photo.src %>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     <% end %>
                 <% else %>
                     <p class="text-danger">No photos are found</p>
@@ -72,6 +92,7 @@
         <div class="container text-center">
             <i style="font-size: 50px;" class="fa-solid fa-spinner"></i>
         </div>
+        
     </div>
 </div>
 <div class="col-2"></div>

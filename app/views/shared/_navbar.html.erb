@@ -5,11 +5,12 @@
                 <% if current_user.present? %>
                     <% if current_user.is_admin == true %>
                         <a class="navbar" href="/">Fotobook Admin</a>
+                    <% else %>
+                        <a class="navbar" href="/">Fotobook</a>
                     <% end %>  
                 <% else %>
                     <a class="navbar" href="/">Fotobook</a>
                 <% end %> 
-
             </div>
             <div class="col-8">
                 <form class="d-flex" role="search">
@@ -28,7 +29,6 @@
                 <% else %>
                     <%= link_to "Log in", new_user_session_path, class: "btn btn-info text-white" %>
                 <% end %>
-                <%# <a class="navbar" href="/users/sign_in" id="login">= t 'navbar.login'</a> %>
             </div>
         </div>
     </div>
