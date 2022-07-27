@@ -45,7 +45,24 @@
                                     </p>
                                     <div class="card-footer row" style="padding-top: 2%; padding-bottom: 2.5%;">
                                         <div class="col-2" style="padding-right: 0px;">
-                                            <button class="like-button"><i style="font-size: 20px;" class="fa-solid fa-heart"></i></button>
+                                            <% if current_user == nil %>
+                                                <button class="liked-button-no-hover"><i class="fa-solid fa-heart"></i></button>
+                                            <% else %>
+                                                <% like = current_user.likes.find_by(likeable: album)%>
+                                                <% if like.nil? %>
+                                                    <form action="/likes" method="post">
+                                                        <input type="hidden" name="like[likeable_id]" value="<%= album.id %>">
+                                                        <input type="hidden" name="like[likeable_type]" value="Album">
+                                                        <input type="hidden" name="like[user_id]" value="<%= current_user.id %>">
+                                                        <button class="like-button" type="submit" value="Like"><i class="fa-solid fa-heart"></i></button>
+                                                    </form>
+                                                <% else %>
+                                                    <form action="<%= like_path(like) %>" method="post">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <button class="liked-button" type="submit" value="Unlike"><i class="fa-solid fa-heart"></i></button>
+                                                    </form>
+                                                <% end %>
+                                            <% end %>
                                         </div>
                                         <div class="col-2" style="padding-left: 0px;">
                                             <p id="heart-number">

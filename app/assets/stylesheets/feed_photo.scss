@@ -93,7 +93,7 @@
     background-color: #F8F8F8; 
     border: none;
 }
-#feed #profile .card-footer i{
+#feed #profile .card-footer .like-button{
     font-size: 13px !important;
     display: inline-block; 
     color: #BDBDBD;
@@ -115,11 +115,22 @@
     font-size: 50px;
 }
 
-.like-button{
+.like-button, .liked-button, .liked-button-no-hover{
     height: 20px;
     background-color: #F8F8F8;
     border: none !important;
 }
+
+#feed #profile .card-footer .liked-button, .liked-button-no-hover{
+    font-size: 13px !important;
+    display: inline-block; 
+    color: #3C5999;
+    border: none !important;
+}
+
 .like-button i:hover{
     color: #3C5999 !important;
+}
+.liked-button i:hover{
+    color: #F8F8F8 !important;
 }

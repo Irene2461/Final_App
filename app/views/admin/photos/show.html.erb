@@ -3,8 +3,30 @@
 <%= render @photo %>
 
 <div>
-  <%= link_to "Edit this photo", edit_photo_path(@photo) %> |
-  <%= link_to "Back to photos", photos_path %>
+  <%#= link_to "Edit this photo", edit_photo_path(@photo) %> |
+  <%#= link_to "Back to photos", photos_path %>
 
-  <%= button_to "Destroy this photo", @photo, method: :delete %>
+  <%#= button_to "Destroy this photo", @photo, method: :delete %>
 </div>
+
+<h1><%= @photo.title %></h1>
+<h2><%= @photo.likes.count %></h2>
+<% like = current_user.likes.find_by(likeable: @photo)%>
+<%= like %>
+<% if like.nil? %>
+  <form action="/likes" method="post">
+    <%# <input type="hidden" name="authenticity_token" value="<% form_authenticity_token %>
+    <h1>Like</h1>
+    <input type="hidden" name="like[likeable_id]" value="<%= @photo.id %>">
+    <input type="hidden" name="like[likeable_type]" value="Photo">
+    <input type="hidden" name="like[user_id]" value="<%= current_user.id %>">
+    <input type="submit" value="Like">
+  </form>
+<% else %>
+  <form action="<%= like_path(like)%>" method="post">
+    <%# <input type="hidden" name="authenticity_token" value="<% form_authenticity_token %>
+    <h1>Unlike</h1>
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Unlike">
+  </form>
+<% end %>

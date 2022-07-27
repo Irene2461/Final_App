@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :photos
       resources :albums
     end
+    resources :likes, only: [:create, :destroy]
     get 'discover/photos'
     get 'discover/albums'
     get 'feeds/photos'
