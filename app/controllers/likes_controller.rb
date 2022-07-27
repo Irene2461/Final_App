@@ -1,14 +1,13 @@
 class LikesController < ApplicationController
     def create
         # binding.pry
-        @like = Like.create(like_params)
-        # if !@like.save
-        #     flash[:notice] = @like.errors.full_message.to_sentence
-        # end
-        if @like.likeable_type == "Photo"
-            redirect_to feeds_photos_path
-        else 
-            redirect_to feeds_albums_path
+        if !current_user.likes.find_by(like_params)
+            @like = current_user.likes.create(like_params)
+            if @like.likeable_type == "Photo"
+                redirect_to feeds_photos_path
+            else 
+                redirect_to feeds_albums_path
+            end
         end
     end
 
@@ -26,6 +25,6 @@ class LikesController < ApplicationController
 
     private
     def like_params
-        params.require(:like).permit(:likeable_id, :likeable_type, :user_id)
+        params.require(:like).permit(:likeable_id, :likeable_type)
     end
 end
