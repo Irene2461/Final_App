@@ -47,7 +47,6 @@ class Admin::UsersController < ApplicationController
 
   def toggle_like
     @liked = current_user.likes.find_by(likeable_id: params[:likeable_id])
-
     if @liked.nil?
       @like = current_user.likes.create(like_params)
       render "likes_create"

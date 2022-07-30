@@ -4,7 +4,7 @@ class LikesController < ApplicationController
         if !current_user.likes.find_by(like_params)
             @like = current_user.likes.create(like_params)
             if @like.likeable_type == "Photo"
-                redirect_to feeds_photos_path
+                redirect_to '/admins/photos/29'
             else 
                 redirect_to feeds_albums_path
             end
@@ -17,7 +17,7 @@ class LikesController < ApplicationController
         type = @like.likeable_type
         @like.destroy
         if type == "Photo"
-            redirect_to feeds_photos_path
+            redirect_to '/admins/photos/29'
         else 
             redirect_to feeds_albums_path
         end

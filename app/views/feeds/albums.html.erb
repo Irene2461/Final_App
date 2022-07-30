@@ -1,10 +1,12 @@
 <div class="col-2 min-vh-100" style="padding-right: 0% !important;">
-    <div class="d-flex justify-content-center" id="menu">
-        <div class="nav flex-column align-items-start nav-pills me-0 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <%= button_to "Feed", feeds_photos_path , :method => :get , :class => 'nav-link active'%>
-            <%= button_to "Discover", '#' , :method => :get , :class => 'nav-link'%>
+    <% if user_signed_in? %>
+        <div class="d-flex justify-content-center" id="menu">
+            <div class="nav flex-column align-items-start nav-pills me-0 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <%= button_to "Feed", feeds_photos_path , :method => :get , :class => 'nav-link active'%>
+                <%= button_to "Discover", '#' , :method => :get , :class => 'nav-link'%>
+            </div>
         </div>
-    </div>
+    <% end %>
 </div>
 <div id="feed" class="container col-8 bg-white mt-3 mb-5">
     <ul class="nav nav-pills mt-3 justify-content-center" id="pills-tab" role="tablist">
