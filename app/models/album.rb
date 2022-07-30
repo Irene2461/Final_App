@@ -4,5 +4,4 @@ class Album < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :nullify
   
   mount_uploader :src, ImageUploader
-  # serialize :srcs, JSON
 end
