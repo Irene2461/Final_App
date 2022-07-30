@@ -1,7 +1,29 @@
 Rails.application.routes.draw do
-  get 'pages/feed'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations'
+  }
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    namespace :admin do 
+      get 'manage/photos', to: 'manage#photos'
+      get 'manage/albums', to: 'manage#albums'
+      get 'manage/users', to: 'manage#users'
+      resources :users
+      resources :photos
+      resources :albums
+    end
+    resources :likes, only: [:create, :destroy]
+    resources :relationships, only: [:create, :destroy]
+    get 'discover/photos'
+    get 'discover/albums'
+    get 'feeds/photos'
+    get 'feeds/albums'
 
-  # Defines the root path route ("/")
-  root "pages#feed"
+    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+    
+    # Defines the root path route ("/")
+    root 'feeds#photos'
+  end
+
 end

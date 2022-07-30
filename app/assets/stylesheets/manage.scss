@@ -1,0 +1,117 @@
+#menu .nav-link.active{
+    color: #3C5999;
+    background: none !important;
+}
+
+#menu .nav-link{
+    color: #828282;
+    font-weight: 600;
+}
+
+/*   v-pills-home   */
+#v-pills-home .col-3{
+    position: relative;
+    width: 23%;
+    text-align: center;
+    padding-right: 0%;
+    padding-left: 0%;
+    margin: 1%;
+}
+
+#v-pills-home .title-container{
+    position: absolute;
+    width: 100%;
+    top: 0%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2.5%;
+}
+#v-pills-home .title-container a{
+    /* margin: 0; */
+    word-wrap: break-word;
+    text-decoration: none;
+    color: #ffffff;
+    opacity: 1;
+}
+#v-pills-home img{
+    width: 100%;
+}
+.tab-content{
+    position: relative;
+}
+#v-pills-home #pagination{
+    padding: 0%;
+    width: 100%;
+    position: absolute;
+    bottom: 5%;   
+    text-align: center;
+}
+
+/*   v-pills-profile   */
+#v-pills-profile .col-3{
+    position: relative;
+    background-color: #F2F2F2;
+    width: 23%;
+    height: 100%;
+    text-align: center;
+    padding-right: 0%;
+    padding-left: 0%;
+    margin: 1%;
+    padding-top: 22%;
+}
+#v-pills-profile .title-container a{
+    word-wrap: break-word;
+    text-decoration: none;
+    color: #ffffff;
+}
+#v-pills-profile .title-container{
+    position: absolute;
+    width: 100%;
+    top: 0%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2.5%;
+}
+
+#v-pills-profile .img_1_1, #v-pills-profile .img_1_2, #v-pills-profile .img_1_3,
+#v-pills-profile .img_2_1, #v-pills-profile .img_2_2, #v-pills-profile .img_2_3,
+#v-pills-profile .img_3_1, #v-pills-profile .img_3_2, #v-pills-profile .img_3_3,
+#v-pills-profile .img_4_1, #v-pills-profile .img_4_2, #v-pills-profile .img_4_3 
+{
+    width: 75%;
+    position: absolute;
+    top: 15.5%;
+    left: 12.5%;
+    bottom: 10%;
+    right: 10%;
+}
+#v-pills-profile .img_1_1, #v-pills-profile .img_2_1, #v-pills-profile .img_3_1, #v-pills-profile .img_4_1{
+    transform: rotate(10deg);
+}
+#v-pills-profile .img_1_2, #v-pills-profile .img_2_2, #v-pills-profile .img_3_2, #v-pills-profile .img_4_2{
+    transform: rotate(5deg);
+}
+#v-pills-profile .img_1_3, #v-pills-profile .img_2_3, #v-pills-profile .img_3_3, #v-pills-profile .img_4_3{
+    transform: rotate(0deg);
+}
+
+#v-pills-profile #pagination{
+    padding: 0%;
+    width: 100%;
+    position: absolute;
+    bottom: 5%;   
+    text-align: center;
+    
+}
+#pagination ul{
+    justify-content: center;
+}
+
+#user-management td{
+    border: none;
+}
+#v-pills-messages #pagination{
+    padding: 0%;
+    width: 100%;
+    position: absolute;
+    bottom: 5%;   
+    text-align: center;
+}

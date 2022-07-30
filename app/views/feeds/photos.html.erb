@@ -1,0 +1,118 @@
+<div class="col-2 min-vh-100" style="padding-right: 0% !important;">
+    <% if user_signed_in? %>
+        <div class="d-flex justify-content-center" id="menu">
+            <div class="nav flex-column align-items-start nav-pills me-0 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <%= button_to (t 'feed.photos.feed'), feeds_photos_path , method: :get , class: 'nav-link active'%>
+                <%= button_to (t 'feed.photos.discover'), '#' , method: :get , class: 'nav-link'%>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<div id="feed" class="container col-8 bg-white mt-3 mb-5">
+    <ul class="nav nav-pills mt-3 justify-content-center" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <%= button_to (t 'feed.photos.photo'), feeds_photos_path , method: :get , class: 'nav-link active', id: 'pills-home-tab'%>
+        </li>
+        <li class="nav-item" role="presentation">
+            <%= button_to (t 'feed.photos.album'), feeds_albums_path , method: :get , class: 'nav-link', id: 'pills-profile-tab'%>
+        </li>
+    </ul>
+    <%# Dùng slice(index1,index2).each để chia row và col %>
+    <div class="tab-content p-2" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+            <div class="row">
+                <% if @photos.present? %>
+                    <% @photos.each do |photo|%>
+                        <div class="col-xl-6 my-2">
+                            <div id="card" class="row d-flex justify-content-around">
+                                <div class="col-6 px-0 py-0">
+                                    <div class="photo-container">
+                                        <button type="button" class="btn p-0" data-bs-toggle="modal" data-bs-target="#p<%= photo.id %>" style="height: 100%; width: 100%;">
+                                            <%= image_tag photo.src %>
+                                        </button>
+                                        <%#= image_tag photo.src %>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div id="profile">
+                                        <h2 id="name">
+                                            <span id="avatar">J</span> 
+                                            <%= @users.find(photo.user_id).first_name%>
+                                            <%= @users.find(photo.user_id).last_name %>
+                                        </h2>
+                                        <h6><%= photo.title %></h6>
+                                        <p class="card-text d-none d-md-block">
+                                            <%= photo.desc %>
+                                        </p>
+                                        <p class="card-text d-md-none">
+                                            <%= photo.desc.slice(0,25) + '...' %>
+                                        </p>
+                                        <div class="card-footer row" style="padding-top: 2%;">
+                                            <div class="col-3 col-md-2" style="padding-right: 0px;">
+                                                <% if current_user == nil %>
+                                                    <button class="liked-button-no-hover"><i class="fa-solid fa-heart"></i></button>
+                                                <% else %>
+                                                    <% like = current_user.likes.find_by(likeable: photo)%>
+                                                    <% if like.nil? %>
+                                                        <form action="/likes" method="post">
+                                                            <input type="hidden" name="like[likeable_id]" value="<%= photo.id %>">
+                                                            <input type="hidden" name="like[likeable_type]" value="Photo">
+                                                            <input type="hidden" name="like[user_id]" value="<%= current_user.id %>">
+                                                            <button class="like-button" type="submit" value="Like"><i class="fa-solid fa-heart"></i></button>
+                                                        </form>
+                                                    <% else %>
+                                                        <form action="<%= like_path(like) %>" method="post">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button class="liked-button" type="submit" value="Unlike"><i class="fa-solid fa-heart"></i></button>
+                                                        </form>
+                                                    <% end %>
+                                                <% end %>
+                                            </div>
+                                            <div class="col-3 col-md-2" style="padding-left: 0px;">
+                                                <p id="heart-number">
+                                                    <%= photo.likes.count %>
+                                                </p>
+                                            </div>
+                                            <div class="d-flex col-md-8 align-items-center" style="padding-right: 0px;">
+                                                <p id="date-time" class="d-none d-sm-block">
+                                                    <%= photo.created_at.to_s.slice(0,20) %>
+                                                </p>
+                                            </div>                                  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="p<%= photo.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <%= image_tag photo.src %>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <p class="text-danger">No photos are found</p>
+                <% end %>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0"></div>
+        </div>
+        <div class="container text-center">
+            <i style="font-size: 50px;" class="fa-solid fa-spinner"></i>
+        </div>
+        
+    </div>
+</div>
+<div class="col-2"></div>

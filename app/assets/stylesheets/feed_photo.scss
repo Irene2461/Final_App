@@ -1,0 +1,136 @@
+#feed{
+    position: absolute;
+    width: auto;
+    left: 224px;
+    right: 224px;
+
+    left: 15%;
+    right: 15%;
+    top: 60px;
+    background: #FFFFFF;
+    padding-left: 2.5%;
+}
+
+#feed .nav-item button{
+    text-align: center;
+    text-decoration: none;
+    color: #3C5999;
+    border: 1px solid #3C5999;
+    border-radius: 3px 0px 0px 3px;
+    padding-bottom: 20px;
+    width: 100%;
+    height: 40px;
+}
+#feed button.active{
+    background: #3C5999;
+    color: #FFFFFF;
+}
+
+.photo-container{
+    background-size: cover;
+    height: 100%;
+    /* background: url('../../public/img/avatar.jpg'); */
+    border-radius: 3px 0px 0px 3px;
+}
+.photo-container img{
+    width: 100%;
+    height: 100%;
+}
+
+#card{
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    background: #F8F8F8;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px 0px 0px 3px;
+}
+
+
+#profile{
+    width: 100%;
+    padding-top: 1%;
+    /* overflow: inherit; */
+}
+#profile p{
+    font-size: 13px;
+    word-wrap: break-word;
+}
+
+#profile h2{
+    color: #3C5999;  
+    font-size: 13px;
+    font-weight: 700; 
+}
+
+#profile h6{
+    font-size: 14px;
+    font-weight: 700;
+}
+#profile .row{
+    padding: 0%;
+}
+
+#feed #name #avatar{
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    background-color: #3C5999;
+    color: #FFFFFF;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+#feed #profile .card-text{
+    font-weight: 400;
+    line-height: 16px;
+    margin-bottom: 0rem;
+}
+#feed #profile .card-footer{
+    margin-top: 0%;
+    background-color: #F8F8F8; 
+    border: none;
+}
+#feed #profile .card-footer .like-button{
+    font-size: 13px !important;
+    display: inline-block; 
+    color: #BDBDBD;
+}
+#feed #profile .card-footer #heart-number{
+    margin: 0;
+    display: inline-block; 
+    color: #3C5999;
+    font-weight: 700;
+    font-size: 10px;
+}
+#feed #profile .card-footer #date-time{
+    font-size: 10px;
+    display: inline-block;
+    color: #BDBDBD;
+    margin-bottom: 0;
+}
+#feed .fa-loader{
+    font-size: 50px;
+}
+
+.like-button, .liked-button, .liked-button-no-hover{
+    height: 20px;
+    background-color: #F8F8F8;
+    border: none !important;
+}
+
+#feed #profile .card-footer .liked-button, .liked-button-no-hover{
+    font-size: 13px !important;
+    display: inline-block; 
+    color: #3C5999;
+    border: none !important;
+}
+
+.like-button i:hover{
+    color: #3C5999 !important;
+}
+.liked-button i:hover{
+    color: #F8F8F8 !important;
+}

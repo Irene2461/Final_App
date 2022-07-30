@@ -12,10 +12,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= render partial:"shared/navbar" %>
-    <div class="container">
-      <%= yield %>
-    </div>
+  <body style="background-color: #F8F8F8;">
+    <%= flash[:alert] %>
+    <%= render partial:"shared/navbar" , locals: { user_name: 'ngoc'} %>
+    <%= yield %>
+    <li><%= link_to 'English', root_path(locale: :en) %></li>
+    <li><%= link_to 'Tiếng Việt', root_path(locale: :vi) %></li>
+    
+    
   </body>
 </html>

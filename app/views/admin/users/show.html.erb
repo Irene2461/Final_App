@@ -1,0 +1,30 @@
+<div class="col-2 min-vh-100" style="padding-right: 0% !important;">
+    <div class="d-flex justify-content-center" id="menu">
+        <div class="nav flex-column align-items-start nav-pills me-0 mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <%= button_to (t 'feed.photos.feed'), feeds_photos_path , method: :get , class: 'nav-link active'%>
+            <%= button_to (t 'feed.photos.discover'), '#' , method: :get , class: 'nav-link'%>
+        </div>
+    </div>
+</div>
+<div id="feed" class="container col-8 bg-white mt-3 mb-5">
+  <p style="color: green"><%= notice %></p>
+  <%= render @user %>
+  <h1><%= current_user.followings.count %></h1>
+  <% fl = current_user.followings.find_by(id: @user.id)%>
+  <% if fl.nil? %>
+    <form action="/relationships" method="post">
+        <input type="hidden" name="relationship[user]" value="<%= @user %>">
+        <button class="like-button" type="submit" value="Follow">Follow</button>
+    </form>
+  <% else %>
+    <form action="<%= relationships_path(fl) %>" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="liked-button" type="submit" value="Unfl">Unfollow</button>
+    </form>
+<% end %>
+  <div>
+    <%= link_to "Edit this user", edit_admin_user_path(@user) %> |
+    <%= link_to "Back to users", admin_users_path %>
+    <%= button_to "Destroy this user", @admin_user, method: :delete %>
+  </div>
+</div>

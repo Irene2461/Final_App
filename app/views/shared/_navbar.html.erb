@@ -2,20 +2,52 @@
     <div class="container-fluid">
         <div class="row align-items-center" id="navbar">
             <div class="col-2 d-flex" id="title">
-                <a class="navbar" href="/">Fotobook</a>
+                <% if current_user.present? %>
+                    <% if current_user.is_admin == true %>
+                        <a class="navbar" href="/">Fotobook Admin</a>
+                    <% else %>
+                        <a class="navbar" href="/">Fotobook</a>
+                    <% end %>  
+                <% else %>
+                    <a class="navbar" href="/">Fotobook</a>
+                <% end %> 
             </div>
             <div class="col-8">
                 <form class="d-flex" role="search">
                     <input
                         class="form-control me-2"
                         type="search"
-                        placeholder="Search Photo/Album"
+                        placeholder= <%= (t "navbar.search")%>
                         aria-label="Search"
                     >
                 </form>
             </div>
-            <div class="col-2 d-inline-block float-start">
-                <a class="navbar" href="/" id="login">Login</a>
+            <div class="col-2 d-inline-block float-start d-flex">
+                <% if user_signed_in? %>
+                    <% if current_user.is_admin == true %>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= current_user.first_name %>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="/admin/photos">Manage</a></li>
+                            </ul>
+                        </div>
+                    <% else %>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= current_user.first_name %>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                            </ul>
+                        </div>
+                    <% end %>
+                    <%= link_to "Log out", destroy_user_session_path, class: "btn btn-danger", method: :delete, data: {turbo_method: :delete} %>
+                <% else %>
+                    <%= link_to "Log in", new_user_session_path, class: "btn btn-info text-white" %>
+                <% end %>
             </div>
         </div>
     </div>

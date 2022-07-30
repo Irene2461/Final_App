@@ -1,0 +1,46 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @photo %>
+
+<div>
+  <%#= link_to "Edit this photo", edit_photo_path(@photo) %> |
+  <%#= link_to "Back to photos", photos_path %>
+
+  <%#= button_to "Destroy this photo", @photo, method: :delete %>
+</div>
+
+<h1><%= @photo.title %></h1>
+<h2><%= @photo.likes.count %></h2>
+<% like = current_user.likes.find_by(likeable: @photo)%>
+<%= like %>
+<% if like.nil? %>
+  <%= form_for(likes_path) do |f| %>
+    <input type="hidden" name="like[likeable_id]" value="<%= @photo.id %>">
+    <input type="hidden" name="like[likeable_type]" value="Photo">
+    <input type="hidden" name="like[user_id]" value="<%= current_user.id %>">
+    <%= submit_tag "Like", class: 'btn btn-success'%>
+  <% end %>
+<% else %>
+  <form action="<%= like_path(like)%>" method="post" data-remote="true">
+    <%# <input type="hidden" name="authenticity_token" value="<% form_authenticity_token %>
+    <h1>Unlike</h1>
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Unlike">
+  </form>
+<% end %>
+
+<%# <script>
+    $(function(){
+        $(".post-form").on('click', function(event){
+            Rails.ajax({
+              type: "POST",
+              url: this.action,
+              data: $(this).serialize(),
+              success: function(data) {
+                  $('.like').addClass('btn-success');
+              }
+            });
+            event.preventDefault();
+        });
+    })
+</script> %>
