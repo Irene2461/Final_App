@@ -50,7 +50,7 @@ gem 'carrierwave', "~> 2.2.2"
 
 gem "mini_magick", "~> 4.11.0"
 
-gem 'cssbundling-rails', "~> 1.1.1"
+#gem 'cssbundling-rails', "~> 1.1.1"
 
 gem 'devise', "~> 4.8.1"
 
